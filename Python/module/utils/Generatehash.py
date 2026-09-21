@@ -13,7 +13,7 @@ def generate_hash(index, transaction, previous_hash, timestamp, hash_standard="0
                 initial_hash_letters = hash_digest[:len(hash_standard)]
                 # print(initial_hash_letters)
                 nonce +=1
-        return hash_digest
+        return hash_digest, nonce
 
 
 if __name__ == "__main__":

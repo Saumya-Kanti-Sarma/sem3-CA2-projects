@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 
 [project]
-name = "blockchain-visualizer"
+name = "blockchain_visualizer"
 version = "0.1.0"
 description = "A simple Python blockchain implementation and visualization-oriented library"
 readme = "README.md"
@@ -17,7 +17,7 @@ authors = [
 
 keywords = [
     "blockchain",
-    "blockchain-visualizer",
+    "blockchain_visualizer",
     "data-structures",
     "linked-list",
     "cryptography",

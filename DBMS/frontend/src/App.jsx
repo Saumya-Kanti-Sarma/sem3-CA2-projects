@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
 import "./App.css";
 
@@ -5,7 +6,6 @@ const API_URL = "http://localhost:5000/employees";
 
 function App() {
   const [employees, setEmployees] = useState([]);
-
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -15,15 +15,12 @@ function App() {
 
   const [editingId, setEditingId] = useState(null);
 
-  // =========================
-  // GET EMPLOYEES
-  // =========================
 
   const fetchEmployees = async () => {
     try {
       const response = await fetch(API_URL);
+      console.log(response)
       const data = await response.json();
-
       setEmployees(data);
     } catch (error) {
       console.error("Error fetching employees:", error);
@@ -34,10 +31,6 @@ function App() {
     fetchEmployees();
   }, []);
 
-  // =========================
-  // HANDLE INPUT
-  // =========================
-
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -45,16 +38,11 @@ function App() {
     });
   };
 
-  // =========================
-  // CREATE / UPDATE
-  // =========================
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       if (editingId) {
-        // UPDATE
         const response = await fetch(`${API_URL}/${editingId}`, {
           method: "PUT",
           headers: {
@@ -119,9 +107,7 @@ function App() {
     }
   };
 
-  // =========================
   // EDIT
-  // =========================
 
   const handleEdit = (employee) => {
     setEditingId(employee.EMPLOYEE_ID);
@@ -134,9 +120,7 @@ function App() {
     });
   };
 
-  // =========================
   // DELETE
-  // =========================
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
@@ -166,9 +150,7 @@ function App() {
     }
   };
 
-  // =========================
   // CANCEL EDIT
-  // =========================
 
   const cancelEdit = () => {
     setEditingId(null);

@@ -1,5 +1,11 @@
 import time
-from .utils.Generatehash import generate_hash
+
+try:
+    from .utils.Generatehash import generate_hash
+except ImportError:  # Allow direct script execution
+    from utils.Generatehash import generate_hash
+
+
 class Block:
     def __init__(
         self,

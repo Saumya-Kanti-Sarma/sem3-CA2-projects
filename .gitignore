@@ -4,5 +4,6 @@ test
 .
 
 __pycache__
-
+node_modules
+*.zip
 pow.json

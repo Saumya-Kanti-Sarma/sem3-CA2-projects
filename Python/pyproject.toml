@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "blockchain_visualizer"
-version = "0.1.0"
+version = "0.1.1"
 description = "A simple Python blockchain implementation and visualization-oriented library"
 readme = "README.md"
 requires-python = ">=3.9"

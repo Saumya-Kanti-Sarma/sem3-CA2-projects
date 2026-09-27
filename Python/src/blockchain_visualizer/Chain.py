@@ -1,22 +1,23 @@
 import json
 
-from .Block import Block
-from .utils.Generatehash import check_hash
+try:
+    from .Block import Block
+    from .utils.Generatehash import check_hash
+except ImportError:  # Allow direct script execution
+    from Block import Block
+    from utils.Generatehash import check_hash
 
 
 class BlockChain:
-
     def __init__(self, pow_file="PoW.json"):
         self.chain = []
         self.pow_file = pow_file
 
         print("Generating index: 0 Block")
-
         genesis_block = Block(
             index=0,
             transaction=0
         )
-
         self.chain.append(genesis_block)
         self.save_pow()
 
@@ -24,9 +25,7 @@ class BlockChain:
         return self.chain[-1]
 
     def check_tamper(self):
-
         for i, block in enumerate(self.chain):
-
             # Check the block's own hash
             if not check_hash(block):
                 return f"Tamper detected in block no {i}"
@@ -41,16 +40,13 @@ class BlockChain:
         return True
 
     def create_new_block(self, transaction):
-
         # Make sure the existing blockchain is valid
         if self.check_tamper() is not True:
             print(self.check_tamper())
             return False
 
         index = len(self.chain)
-
         previous_block = self.last_block()
-
         print(f"Generating index: {index} Block")
 
         new_block = Block(
@@ -58,20 +54,14 @@ class BlockChain:
             transaction=transaction,
             previous_hash=previous_block.hash
         )
-
         self.chain.append(new_block)
-
         self.save_pow()
-
         return new_block
 
     def save_pow(self):
-
         data = []
-
         for block in self.chain:
             data.append(block.get_block_data())
-
         with open(self.pow_file, "w", encoding="utf-8") as file:
             json.dump(
                 data,
@@ -80,13 +70,10 @@ class BlockChain:
             )
 
     def __str__(self):
-
         output = ""
-
         for block in self.chain:
             output += str(block)
             output += "\n---------------------\n"
-
         return output
 
 
